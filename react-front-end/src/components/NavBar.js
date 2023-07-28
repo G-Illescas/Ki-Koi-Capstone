@@ -18,6 +18,7 @@ const NavBar = () => {
                             <form class="d-flex" role="search">
                         </form>
                         </ul>
+                        <a class="nav-link" href="#">Login</a>
                     </div>
                 </div>
             </Nav>

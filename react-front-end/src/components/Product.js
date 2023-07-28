@@ -20,7 +20,7 @@ const Product = () => {
             <div>
             </div>
             <div class="container text-center" id="prodcontain">
-                {productData.map((data) => (
+                {productData.map(data => (
                 <>
                     <div id="proddisplay">
                         <div class="card" style={{width: "18rem"}}>

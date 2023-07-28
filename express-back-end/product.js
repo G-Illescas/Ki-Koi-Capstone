@@ -24,5 +24,9 @@ const productModel = mongoose.model("product", product);
 exports.DAL = {
     getProducts: async() => {
         return await productModel.find().exec();
-    }
+    },
+    getProduct: async(id) => {
+        let filter = {id}
+        return await productModel.find(filter)
+    },
 };
