@@ -28,5 +28,5 @@ exports.DAL = {
     getProduct: async(id) => {
         let filter = {id}
         return await productModel.find(filter)
-    },
+    }
 };
