@@ -7,6 +7,10 @@ import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import Main from './components/Main';
 import Product from './components/Product';
+import Register from './components/Register';
+import Login from './components/Login';
+import Admin from './components/Admin';
+import AdminRoutes from './components/AdminRoutes';
 
 const router = createBrowserRouter([
   { path: "/",
@@ -15,6 +19,18 @@ const router = createBrowserRouter([
   {
     path: "/product",
     element:<><NavBar/><Product/><Footer/></>
+  },
+  {
+    path: "/register",
+    element:<><NavBar/><Register/><Footer/></>
+  },
+  {
+    path: "/login",
+    element:<><NavBar/><Login/><Footer/></>
+  },
+  {
+    path: "/admin",
+    element:<><NavBar/><Admin/><Footer/></>
   }
 ]);
 

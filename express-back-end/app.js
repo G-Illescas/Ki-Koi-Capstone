@@ -1,4 +1,3 @@
-const bcrypt = require("bcrypt");
 const express = require("express");
 const cors = require("cors");
 const pd = require("./product").DAL;
@@ -6,6 +5,9 @@ const User = require("./user");
 const app = express();
 const port = 5000;
 const bodyParser = require("body-parser");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const admin = require("./admin");
 
 app.use(cors({
     origin: `http://localhost:3000`
@@ -48,6 +50,48 @@ app.post("/register", (req, res) => {
         res.status(500).send({
             message: "Password was not hashed", e
         });
+    });
+});
+
+app.post("/login", (req, res) => {
+    User.findOne({email: req.body.email})
+    .then((user) => {
+        bcrypt.compare(req.body.password, user.password)
+        .then((passwordCheck) => {
+            if(!passwordCheck) {
+                return response.status(400).send({
+                    message: "Password does not match", e,
+                });
+            }
+            const token = jwt.sign(
+                {
+                    userId: user._id,
+                    userEmail: user.email,
+                },
+                "RANDOM-TOKEN",
+                {expiresIn: "24h"}
+            );
+            res.status(200).send({
+                message: "Login Successful",
+                email: user.email, token,
+            });
+        })
+        .catch((e) => {
+            res.status(400).send({
+                message: "Password does not match", e,
+            });
+        });
+    })
+    .catch((e) => {
+        res.status(404).send({
+            message: "Email was not found", e,
+        });
+    });
+});
+
+app.get("/admin-endpoint", admin, (req, res) => {
+    res.json({
+        message:"Admin access"
     });
 });
 

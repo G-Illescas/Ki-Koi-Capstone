@@ -18,9 +18,9 @@ const NavBar = () => {
                             <form class="d-flex" role="search">
                         </form>
                         </ul>
-                        <a class="nav-link" href="#">Register</a>
+                        <a class="nav-link" href="/register">Register</a>
                         <div class="vr"></div>
-                        <a class="nav-link" href="#">Login</a>
+                        <a class="nav-link" href="/login">Login</a>
                     </div>
                 </div>
             </Nav>
