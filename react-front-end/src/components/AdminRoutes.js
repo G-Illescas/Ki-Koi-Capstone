@@ -1,5 +1,5 @@
 import React from "react";
-import {Routes, Route, redirect} from "react-router-dom";
+import {Routes, Route} from "react-router-dom";
 import Cookies from "universal-cookie";
 
 const cookies = new Cookies();

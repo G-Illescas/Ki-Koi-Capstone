@@ -10,7 +10,7 @@ import Product from './components/Product';
 import Register from './components/Register';
 import Login from './components/Login';
 import Admin from './components/Admin';
-import AdminRoutes from './components/AdminRoutes';
+import Add from './components/Add';
 
 const router = createBrowserRouter([
   { path: "/",
@@ -31,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: "/admin",
     element:<><NavBar/><Admin/><Footer/></>
+  },
+  {
+    path: "/add",
+    element:<><NavBar/><Add/><Footer/></>
   }
 ]);
 

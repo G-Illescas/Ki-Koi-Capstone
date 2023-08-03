@@ -26,6 +26,21 @@ app.get("/product/:_id", async(req, res) => {
     return res.json(products);
 });
 
+app.post("/addProduct/", async(req, res) => {
+    const {title, url, money, box, info, detail} = req.body;
+    try {
+        pd.createProduct(title, url, money, box, info, detail);
+    }
+    catch (e) {
+        console.error(e);
+    }
+});
+
+app.delete("/delete/:_id", async(req, res) => {
+    let product = await pd.deleteProduct(req.params._id);
+    res.json(product);
+})
+
 app.post("/register", (req, res) => {
     bcrypt.hash(req.body.password, 10)
     .then((hashedPassword) => {
@@ -91,8 +106,14 @@ app.post("/login", (req, res) => {
 
 app.get("/admin-endpoint", admin, (req, res) => {
     res.json({
-        message:"Admin access"
+        message:"User is logged in"
     });
+});
+
+app.get("/admin-products", admin, async(req, res) => {
+    res.json({
+        data: await pd.getProducts()
+    })
 });
 
 app.listen(port, () => {

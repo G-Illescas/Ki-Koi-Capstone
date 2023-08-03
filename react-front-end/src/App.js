@@ -3,7 +3,7 @@ import NavBar from 'react-bootstrap/Navbar';
 
 function App() {
   return (
-    <div className="App">
+    <div class="App">
       <NavBar class="navbar">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">NavBar</a>

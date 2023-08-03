@@ -22,11 +22,25 @@ const product = new Schema(
 const productModel = mongoose.model("product", product);
 
 exports.DAL = {
+    createProduct: (title, url, money, box, info, detail) => {
+        let newProduct = {
+            name: title,
+            img: url,
+            price: money,
+            category: box,
+            details: info,
+            description: detail
+        };
+        productModel.collection.insertOne(newProduct);
+    },
     getProducts: async() => {
         return await productModel.find().exec();
     },
-    getProduct: async(id) => {
-        let filter = {id}
+    getProduct: async(name) => {
+        let filter = {name}
         return await productModel.find(filter)
+    },
+    deleteProduct: async(id) => {
+        return await productModel.deleteOne({_id:id}).exec();
     }
 };
