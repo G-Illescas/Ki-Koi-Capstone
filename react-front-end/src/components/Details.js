@@ -1,6 +1,8 @@
-import {React, useEffect, useState} from 'react';
+import {React, useEffect, useState, useParams} from 'react';
 
 const Details = () => {
+    let id = useParams();
+
     return (
         <div>Details</div>
     )

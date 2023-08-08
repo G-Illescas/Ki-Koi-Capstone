@@ -12,8 +12,8 @@ code {
     monospace;
 }
 
-Nav {
-  background-color: #f7c95d;
+.bg-body-tertiary {
+  background-color: #f7c95d !important;
 }
 
 #buttons {

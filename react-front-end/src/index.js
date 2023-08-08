@@ -11,6 +11,7 @@ import Register from './components/Register';
 import Login from './components/Login';
 import Admin from './components/Admin';
 import Add from './components/Add';
+import Details from './components/Details';
 
 const router = createBrowserRouter([
   { path: "/",
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
   {
     path: "/add",
     element:<><NavBar/><Add/><Footer/></>
+  },
+  {
+    path:"/product/:id",
+    element:<><NavBar/><Details/><Footer/></>
   }
 ]);
 

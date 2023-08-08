@@ -5,11 +5,6 @@ import Cookies from "universal-cookie";
 const cookies = new Cookies();
 const token = cookies.get("TOKEN");
 
-const logout = () => {
-    cookies.remove("TOKEN", {path: "/"});
-    window.location.href = "/";
-}
-
 export default function Admin() {
     const [message, setMessage] = useState("");
     const [productData, setProductData] = useState([]);
@@ -73,26 +68,24 @@ export default function Admin() {
     
     if(productData && message) {return (
         <div>
-            <div class="hstack gap-3">
-                <div class="p-2 ms-auto"><a class="btn btn-success" variant="success" href="/add">Add</a></div>
-                <div class="vr"></div>
-                <div class="p-2"><button class="btn btn-danger" variant="danger" type="submit" onClick={() => logout()}>Logout</button></div>
-            </div>
-            <div class="container text-center" id="prodcontain">
+            <div className="container text-center" id="prodcontain">
                 {productData?.map(data => (
                     <>
                     <div key={data._id} id="proddisplay">
-                        <div class="card" style={{width: "18rem"}}>
-                            <img src={data.img} class="card-img-top " alt="productImg"/>
-                            <div class="card-body">
-                                <h4 class="card-title">{data.name}</h4>
-                                <p class="card-text">${data.price}</p>
-                                <ul>
-                                    <li>
-                                        {data.details}
-                                    </li>
-                                </ul>
-                                <button class="btn btn-danger" id="buttons" variant="danger" onClick={() => {go(data._id)}}>Delete</button>
+                        <div className="card text-center" style={{width: "18rem"}}>
+                            <img src={data.img} className="card-img-top " alt="productImg"/>
+                            <div className="card-body text-center">
+                                <h4 className="card-title">{data.name}</h4>
+                                <p className="card-text">${data.price}</p>
+                                <ol>
+                                    <ul>
+                                    {data.details[0]}
+                                    </ul>
+                                    <ul>
+                                    {data.details[1]}
+                                    </ul>
+                                </ol>
+                                <button className="btn btn-danger" id="buttons" variant="danger" onClick={() => {go(data._id)}}>Delete</button>
                             </div>
                         </div>
                     </div>

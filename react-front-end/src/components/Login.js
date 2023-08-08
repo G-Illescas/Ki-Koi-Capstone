@@ -34,17 +34,17 @@ const Login = () => {
     return (
         <>
             <h1>Login</h1>
-            <form class="row g-3">
-                <div class="col-md-4">
-                    <label for="validationDefault01" class="form-label">Email</label>
-                    <input type="email" name="email" value={email} class="form-control" id="validationDefault01" required onChange={(e) => setEmail(e.target.value)}/>
+            <form className="row g-3">
+                <div className="col-md-4">
+                    <label for="validationDefault01" className="form-label">Email</label>
+                    <input type="email" name="email" value={email} className="form-control" id="validationDefault01" required onChange={(e) => setEmail(e.target.value)}/>
                 </div>
-                <div class="col-md-4">
-                    <label for="validationDefault02" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="validationDefault02" required onChange={(e) => setPassword(e.target.value)}/>
+                <div className="col-md-4">
+                    <label for="validationDefault02" className="form-label">Password</label>
+                    <input type="password" className="form-control" id="validationDefault02" required onChange={(e) => setPassword(e.target.value)}/>
                 </div>
-                <div class="col-12">
-                    <button class="btn btn-primary" variant="primary" type="submit" onClick={(e) => handleSubmit(e)}>Submit form</button>
+                <div className="col-12">
+                    <button className="btn btn-primary" variant="primary" type="submit" onClick={(e) => handleSubmit(e)}>Submit form</button>
                 </div>
                 {login ? (
                     <p className='text-success'>User is logged in</p>

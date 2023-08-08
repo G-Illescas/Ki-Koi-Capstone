@@ -26,10 +26,11 @@ app.get("/product/:_id", async(req, res) => {
     return res.json(products);
 });
 
-app.post("/addProduct/", async(req, res) => {
+app.post("/add-product/", async(req, res) => {
     const {title, url, money, box, info, detail} = req.body;
     try {
         pd.createProduct(title, url, money, box, info, detail);
+        console.log("Sent");
     }
     catch (e) {
         console.error(e);
