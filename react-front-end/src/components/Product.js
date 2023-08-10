@@ -28,7 +28,7 @@ const Product = () => {
                             <div className="card-body">
                                 <h4 className="card-title">{data.name}</h4>
                                 <p className="card-text">${data.price}</p>
-                                <Link className="btn btn-primary nav-link" id="buttons">View</Link>
+                                <Link to={`/product/${data._id}`} className="btn btn-primary nav-link" id="buttons">View</Link>
                             </div>
                         </div>
                     </div>

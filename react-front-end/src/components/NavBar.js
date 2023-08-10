@@ -35,17 +35,18 @@ const NavBar = () => {
         <div className="sticky-top">
                 <Nav className="navbar navbar-expand-lg bg-body-tertiary">
                     <div className="container-fluid">
-                        <a className="navbar-brand" href="/">Navbar</a>
+                        <a className="navbar-brand" href="/">
+                            <img src={process.env.PUBLIC_URL + '/logo.png'} alt="logo"/>
+                        </a>
                         <div className="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li className="nav-item">
                                 <a className="nav-link" href="/product">Clothes</a>
                                 </li>
+                                <div className="vr"></div>
                                 <li className="nav-item">
-                                <a className="nav-link" href="#">Merch</a>
+                                <a className="nav-link" href="/cart">Cart</a>
                                 </li>
-                                <form className="d-flex" role="search">
-                            </form>
                             </ul>
                             <div className="hstack gap-3">
                                 <div className="p-2 ms-auto"><a className="nav-link" variant="success" href="/add">Add Product</a></div>
@@ -61,19 +62,20 @@ const NavBar = () => {
     else {
         return (
             <div className="sticky-top">
-                <Nav className="navbar navbar-expand-lg bg-body-tertiary">
+                <Nav className="navbar bg-body-tertiary">
                     <div className="container-fluid">
-                        <a className="navbar-brand" href="/">Navbar</a>
+                        <a className="navbar-brand" href="/">
+                            <img id="logo" src={process.env.PUBLIC_URL + '/logo.png'} alt="logo"/>
+                        </a>
                         <div className="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li className="nav-item">
                                 <a className="nav-link" href="/product">Clothes</a>
                                 </li>
+                                <div className="vr"></div>
                                 <li className="nav-item">
-                                <a className="nav-link" href="#">Merch</a>
+                                <a className="nav-link" href="/cart">Cart</a>
                                 </li>
-                                <form className="d-flex" role="search">
-                            </form>
                             </ul>
                             <div className="hstack gap-3">
                                 <div className="p-2 ms-auto"><a className="nav-link" href="/register">Register</a></div>

@@ -63,8 +63,8 @@ export default function Admin() {
             .catch(error => {
                 console.error(error);
             });
-        }
-    }
+        };
+    };
     
     if(productData && message) {return (
         <div>
@@ -73,7 +73,7 @@ export default function Admin() {
                     <>
                     <div key={data._id} id="proddisplay">
                         <div className="card text-center" style={{width: "18rem"}}>
-                            <img src={data.img} className="card-img-top " alt="productImg"/>
+                            <img src={data.img} className="card-img-top" alt="productImg"/>
                             <div className="card-body text-center">
                                 <h4 className="card-title">{data.name}</h4>
                                 <p className="card-text">${data.price}</p>

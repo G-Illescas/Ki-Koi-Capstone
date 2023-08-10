@@ -13,7 +13,12 @@ code {
 }
 
 .bg-body-tertiary {
-  background-color: #f7c95d !important;
+  background-color: #ffc130 !important;
+}
+
+.nav-link {
+  font-size: 22px;
+  color: white;
 }
 
 #buttons {
@@ -36,4 +41,28 @@ code {
 .card-text {
   font-size: 18px;
   font-style: oblique;
+}
+
+#details{
+  text-transform: capitalize;
+  font-weight: bold;
+  text-emphasis: bold;
+}
+
+#priceText{
+  font-size: 35px;
+}
+
+#prodDetails{
+  font-size: 20px;
+}
+
+#prodImg{
+  max-width: 170%;
+  height: auto;
+}
+
+#cartImg{
+  max-width: 20%;
+  height: auto;
 }

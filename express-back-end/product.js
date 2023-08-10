@@ -36,9 +36,8 @@ exports.DAL = {
     getProducts: async() => {
         return await productModel.find().exec();
     },
-    getProduct: async(name) => {
-        let filter = {name}
-        return await productModel.find(filter)
+    getProduct: async(id) => {
+        return await productModel.findOne({_id:id}).exec();
     },
     deleteProduct: async(id) => {
         return await productModel.deleteOne({_id:id}).exec();

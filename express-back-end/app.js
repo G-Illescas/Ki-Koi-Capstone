@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const pd = require("./product").DAL;
+const cr = require("./cart").DAL;
 const User = require("./user");
 const app = express();
 const port = 5000;
@@ -21,6 +22,11 @@ app.get("/products", async(req, res) => {
     return res.json(products);
 });
 
+app.get("/cart", async(req, res) => {
+    let items = await cr.getCartItems();
+    return res.json(items);
+});
+
 app.get("/product/:_id", async(req, res) => {
     let products = await pd.getProduct(req.params._id);
     return res.json(products);
@@ -30,7 +36,16 @@ app.post("/add-product/", async(req, res) => {
     const {title, url, money, box, info, detail} = req.body;
     try {
         pd.createProduct(title, url, money, box, info, detail);
-        console.log("Sent");
+    }
+    catch (e) {
+        console.error(e);
+    }
+});
+
+app.post("/add-cart/", async(req, res) => {
+    const {title, url, money} = req.body;
+    try {
+        cr.createCartItem(title, url, money);
     }
     catch (e) {
         console.error(e);
@@ -40,7 +55,12 @@ app.post("/add-product/", async(req, res) => {
 app.delete("/delete/:_id", async(req, res) => {
     let product = await pd.deleteProduct(req.params._id);
     res.json(product);
-})
+});
+
+app.delete("/deleteItem/:_id", async(req, res) => {
+    let item = await cr.deleteCartItem(req.params._id);
+    res.json(item);
+});
 
 app.post("/register", (req, res) => {
     bcrypt.hash(req.body.password, 10)
@@ -60,7 +80,7 @@ app.post("/register", (req, res) => {
             res.status(500).send({
                 message:"User was not created", e
             });
-        })
+        });
     })
     .catch((e) => {
         res.status(500).send({

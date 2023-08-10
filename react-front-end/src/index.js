@@ -12,6 +12,7 @@ import Login from './components/Login';
 import Admin from './components/Admin';
 import Add from './components/Add';
 import Details from './components/Details';
+import Cart from './components/Cart';
 
 const router = createBrowserRouter([
   { path: "/",
@@ -38,9 +39,17 @@ const router = createBrowserRouter([
     element:<><NavBar/><Add/><Footer/></>
   },
   {
-    path:"/product/:id",
+    path: "/product/:id",
     element:<><NavBar/><Details/><Footer/></>
-  }
+  },
+  {
+    path: "/cart",
+    element:<><NavBar/><Cart/><Footer/></>
+  },
+  {
+    path: "/*",
+    element:<><NavBar/><Main/><Footer/></>
+  },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
