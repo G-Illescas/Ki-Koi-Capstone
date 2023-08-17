@@ -68,23 +68,19 @@ export default function Admin() {
     
     if(productData && message) {return (
         <div>
-            <div className="container text-center" id="prodcontain">
+            <div className="container text-center justify-content-center" id="prodcontain">
                 {productData?.map(data => (
                     <>
                     <div key={data._id} id="proddisplay">
-                        <div className="card text-center" style={{width: "18rem"}}>
+                        <div className="card text-center" style={{width: "21rem"}}>
                             <img src={data.img} className="card-img-top" alt="productImg"/>
-                            <div className="card-body text-center">
+                            <div className="card-body">
                                 <h4 className="card-title">{data.name}</h4>
                                 <p className="card-text">${data.price}</p>
-                                <ol>
-                                    <ul>
-                                    {data.details[0]}
-                                    </ul>
-                                    <ul>
-                                    {data.details[1]}
-                                    </ul>
-                                </ol>
+                                <p className="card-text"><small class="text-body-secondary">{data.category[0]}</small> <small class="text-body-secondary">{data.category[1]}</small> <small class="text-body-secondary">{data.category[2]}</small> </p>
+                                <div className='' id="adminDetails">
+                                    <p>{data.details[0]}</p> <p>{data.details[1]}</p>
+                                </div>
                                 <button className="btn btn-danger" id="buttons" variant="danger" onClick={() => {go(data._id)}}>Delete</button>
                             </div>
                         </div>
@@ -98,7 +94,7 @@ export default function Admin() {
     else {
         return (
             <>
-            <div>Admin</div>
+            <div>You do not have access to this page</div>
             </>
         )
     }

@@ -7,7 +7,7 @@ const cookies = new Cookies();
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [login, setLogin] = useState(false);
+    const [login, setLogin] = useState(null);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -28,6 +28,7 @@ const Login = () => {
         })
         .catch((e) => {
             e = new Error();
+            setLogin(false)
         });
     }
 
@@ -46,10 +47,11 @@ const Login = () => {
                 <div className="col-12">
                     <button className="btn btn-primary" variant="primary" type="submit" onClick={(e) => handleSubmit(e)}>Submit form</button>
                 </div>
-                {login ? (
-                    <p className='text-success'>User is logged in</p>
-                ) : (
-                    <p className='text-danger'>Login failed</p>
+                {login === true && (
+                    <p className='text-success'>User was logged in</p>
+                )}
+                {login === false && (
+                    <p className='text-danger'>Error during login</p>
                 )}
             </form>
         </>

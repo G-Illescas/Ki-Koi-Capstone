@@ -43,9 +43,9 @@ app.post("/add-product/", async(req, res) => {
 });
 
 app.post("/add-cart/", async(req, res) => {
-    const {title, url, money} = req.body;
+    const {code, title, url, money} = req.body;
     try {
-        cr.createCartItem(title, url, money);
+        cr.createCartItem(code, title, url, money);
     }
     catch (e) {
         console.error(e);
@@ -61,6 +61,11 @@ app.delete("/deleteItem/:_id", async(req, res) => {
     let item = await cr.deleteCartItem(req.params._id);
     res.json(item);
 });
+
+app.delete("/deleteCart", async(req, res) => {
+    let cart = await cr.deleteCart();
+    res.json(cart);
+})
 
 app.post("/register", (req, res) => {
     bcrypt.hash(req.body.password, 10)

@@ -49,6 +49,10 @@ code {
   text-emphasis: bold;
 }
 
+#adminDetails{
+  text-transform: capitalize;
+}
+
 #priceText{
   font-size: 35px;
 }

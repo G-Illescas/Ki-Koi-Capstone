@@ -19,6 +19,7 @@ const Details = () => {
     function create(event){
         event.preventDefault();
         console.log("Create is working fine");
+        const code = productData._id;
         const title = productData.name;
         const url = productData.img;
         const money = productData.price;
@@ -27,7 +28,7 @@ const Details = () => {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({title, url, money})
+            body: JSON.stringify({code, title, url, money})
         })
         .then(response => response.json())
         .then(data => {
@@ -41,27 +42,26 @@ const Details = () => {
 
     if(Object.keys(productData).length > 0) {return (
         <form onSubmit={create}>
-            <div className='container text-center justify-content-center' id="prodcontain">
-                <>
-                <div className="mb-6" style={{width: "540px"}}>
-                    <div className="row g-2">
-                        <div className="col-md-4" id="prodImgContainer">
-                            <img src={productData.img} className="img-fluid rounded-start" alt="productImg" id="prodImg"/>
+            <div className='container text-center justify-content-center'>
+                <div className="mb-3" style={{width: "80"}}>
+                    <div className="row g-0">
+                        <div className="col-md-4">
+                            <img src={productData.img} className="img-fluid rounded-start" alt="productImg"/>
                         </div>
-                        <div className="col-md-9">
-                            <div className="card-body justify-content-center">
-                                <h1 className="card-title">{productData.name}</h1>
-                                <p className="card-text" id="priceText">${productData.price}</p>
-                                <ol className='text-center align-items-center' id="prodDetails"> <ul id="details"> {productData.category[0]} | {productData.category[1]} </ul> </ol>
-                                <ol className='text-center align-items-center' id="prodDetails"> <ul> {productData.details[0]} </ul> <ul> {productData.details[1]} </ul> </ol>
+                        <div className="d-flex col-md-6">
+                            <div className="d-flex col-md-12">
+                                <div className="card-body justify-content-center">
+                                    <h2 className="card-title">{productData.name}</h2>
+                                    <h3 className="card-title">${productData.price}</h3>
+                                    <p className="card-text"><small class="text-body-secondary">{productData.category[0]}  {productData.category[1]}</small></p>
+                                    <p className="card-text"><small class="text-body-secondary">{productData.details[0]} {productData.details[1]}</small></p>
+                                    <p className="card-text">{productData.description}</p>
+                                    <button className="btn btn-warning" id="buttons" variant="warning" type="submit">Add to cart</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12">
-                        <button type="submit" class="btn btn-primary">Add</button>
-                    </div>
                 </div>
-                </>
             </div>
         </form>
     )

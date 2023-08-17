@@ -9,6 +9,7 @@ connection.once("open", () => {
 
 const cart = new Schema(
     {
+        code: String,
         name: String,
         img: String,
         price: String,
@@ -18,8 +19,9 @@ const cart = new Schema(
 const cartModel = mongoose.model("cart", cart);
 
 exports.DAL = {
-    createCartItem: (title, url, money) => {
+    createCartItem: (id, title, url, money) => {
         let newCart = {
+            code: id,
             name: title,
             img: url,
             price: money,
@@ -31,5 +33,8 @@ exports.DAL = {
     },
     deleteCartItem: async(id) => {
         return await cartModel.deleteOne({_id:id}).exec();
+    },
+    deleteCart: async() => {
+        return await cartModel.deleteMany({}).exec();
     }
 };

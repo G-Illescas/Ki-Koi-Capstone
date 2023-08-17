@@ -53,40 +53,40 @@ const Add = () => {
 
     if(message) {return (
         <>
-        <form class="row g-3" onSubmit={create}>
-            <div class="col-md-5">
-                <label for="inputName" class="form-label">Name</label>
-                <input type="text" class="form-control" id="inputName" value={title} onChange={e => setTitle(e.target.value)}/>
+        <form className="row g-3" onSubmit={create}>
+            <div className="col-md-5">
+                <label for="inputName" className="form-label">Name</label>
+                <input type="text" className="form-control" id="inputName" value={title} onChange={e => setTitle(e.target.value)}/>
             </div>
-            <div class="col-5">
-                <label for="inputImage" class="form-label">Image</label>
-                <input type="text" class="form-control" id="inputPImage" value={url} onChange={e => setUrl(e.target.value)}/>
+            <div className="col-5">
+                <label for="inputImage" className="form-label">Image</label>
+                <input type="text" className="form-control" id="inputPImage" value={url} onChange={e => setUrl(e.target.value)}/>
             </div>
-            <div class="col-5">
-                <label for="inputPrice" class="form-label">Price</label>
-                <input type="float" class="form-control" id="inputPrice" value={money} onChange={e => setMoney(e.target.value)}/>
+            <div className="col-5">
+                <label for="inputPrice" className="form-label">Price</label>
+                <input type="float" className="form-control" id="inputPrice" value={money} onChange={e => setMoney(e.target.value)}/>
             </div>
-            <div class="col-5">
-                <label for="inputCategory" class="form-label">Category</label>
-                <input class="form-control" id="inputCategory" value={box.join(',')} onChange={e => setBox(e.target.value.split(','))}/>
+            <div className="col-5">
+                <label for="inputCategory" className="form-label">Category</label>
+                <input className="form-control" id="inputCategory" value={box.join(',')} onChange={e => setBox(e.target.value.split(','))}/>
             </div>
-            <div class="col-md-5">
-                <label for="inputDetails" class="form-label">Details</label>
-                <input class="form-control" id="inputDetails" value={info.join(',')} onChange={e => setInfo(e.target.value.split(','))}/>
+            <div className="col-md-5">
+                <label for="inputDetails" className="form-label">Details</label>
+                <input className="form-control" id="inputDetails" value={info.join(',')} onChange={e => setInfo(e.target.value.split(','))}/>
             </div>
-            <div class="col-md-4">
-                <label for="inputDescription" class="form-label">Description</label>
-                <input type="text" class="form-control" id="inputDescription" value={detail} onChange={e => setDetail(e.target.value)}/>
+            <div className="col-md-4">
+                <label for="inputDescription" className="form-label">Description</label>
+                <input type="text" className="form-control" id="inputDescription" value={detail} onChange={e => setDetail(e.target.value)}/>
             </div>
-            <div class="col-12">
-                <button type="submit" class="btn btn-primary">Add</button>
+            <div className="col-12">
+                <button type="submit" className="btn btn-primary">Add</button>
             </div>
         </form>
         </>
     )}
     else {
         return (
-            <div>Add</div>
+            <div>You do not have access to this page</div>
         )
     }
 }
