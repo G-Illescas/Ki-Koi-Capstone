@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 const Cart = () => {
     const [productData, setProductData] = useState([]);
     const [checkout, setCheckout] = useState(null);
+    const [form, setForm] = useState(null);
 
     useEffect(() => {
         fetch(`http://localhost:5000/cart`)
@@ -39,29 +40,67 @@ const Cart = () => {
         };
     };
 
-    function secondGo(){
-        fetch(`http://localhost:5000/deleteCart`, {
+    function secondGo(event){
+        event.preventDefault();
+        const firstName = document.getElementById('firstName').value;
+        const lastName = document.getElementById('lastName').value;
+        const email = document.getElementById('email').value;
+        const address = document.getElementById('address').value;
+        const city = document.getElementById('city').value;
+        const zip = document.getElementById('zip').value;
+        const ccName = document.getElementById('cc-name').value;
+        const ccNumber = document.getElementById('cc-number').value;
+        const ccExpiration = document.getElementById('cc-expiration').value;
+        const ccCVV = document.getElementById('cc-cvv').value;
+
+        if (
+            firstName === '' ||
+            lastName === '' ||
+            email === '' ||
+            address === '' ||
+            city === '' ||
+            zip === '' ||
+            ccName === '' ||
+            ccNumber === '' ||
+            ccExpiration === '' ||
+            ccCVV === ''
+        ) {
+            setForm(false);
+        }
+        else (
+            fetch(`http://localhost:5000/deleteCart`, {
             method: "DELETE"
         })
+        .then(setForm(true))
         .then(response => response.json())
         .then(() => {
             fetch(`http://localhost:5000/cart`)
             .then(response => response.json())
             .then(data => {
                 setProductData(data);
-                setCheckout(true)
             })
+            .then(setCheckout(true))
             .catch(error => {
                 console.error("Error regrabing data", error)
             })
         })
         .catch(error => {
             console.error("Error deleting cart", error)
-            setCheckout(false);
         })
+        .then(setCheckout(false))
+        )
     }
 
-    if(productData){return (
+    function calculateTotalPrice() {
+        let totalPrice = 0;
+        for (const data of productData) {
+            const priceAsFloat = parseFloat(data.price);
+            totalPrice += priceAsFloat;
+        }
+        return totalPrice.toFixed(2);
+    }
+
+    if(productData.length > 0){return (
         <div className="row g-5">
             <div className="col-md-5 col-lg-4 order-md-last">
                 <>
@@ -85,7 +124,7 @@ const Cart = () => {
                     ))}
                     <li className="list-group-item d-flex justify-content-between">
                         <span>Total (USD)</span>
-                        <strong>$20</strong>
+                        <strong>${calculateTotalPrice()}</strong>
                     </li>
                 </>
                 {checkout === true && (
@@ -96,44 +135,46 @@ const Cart = () => {
                 )}
             </div>
             <div className="col-md-7 col-lg-8">
-                <h4 className="mb-3">Billing address</h4>
-                <form className="needs-validation" novalidate="">
+                <h2 className="mb-3">Billing address</h2>
+                {form === false && (
+                    <h4 className='text-danger'>Please fill form out</h4>
+                )}
+                <form className="needs-validation" onSubmit={secondGo}>
                 <div className="row g-3">
                     <div className="col-sm-5">
-                        <label for="firstName" className="form-label">First name</label>
-                        <input type="text" className="form-control" id="firstName" required=""/>
+                        <label htmlFor="firstName" className="form-label">First name</label>
+                        <input type="text" className="form-control" id="firstName" required/>
                         <div className="invalid-feedback"> Valid first name is required.</div>
                     </div>
                     <div className="col-sm-5">
-                        <label for="lastName" className="form-label">Last name</label>
-                        <input type="text" className="form-control" id="lastName"required=""/>
+                        <label htmlFor="lastName" className="form-label">Last name</label>
+                        <input type="text" className="form-control" id="lastName" required/>
                         <div className="invalid-feedback"> Valid last name is required.</div>
                     </div>
                     <div className="col-10">
-                        <label for="email" className="form-label">Email</label>
-                        <input type="email" className="form-control" id="email" placeholder="you@example.com"/>
+                        <label htmlFor="email" className="form-label">Email</label>
+                        <input type="email" className="form-control" id="email" placeholder="you@example.com" required/>
                         <div className="invalid-feedback">Please enter a valid email address for shipping updates.</div>
                     </div>
                     <div className="col-10">
-                        <label for="address" className="form-label">Address</label>
-                        <input type="text" className="form-control" id="address" placeholder="1234 Main St" required=""/>
+                        <label htmlFor="address" className="form-label">Address</label>
+                        <input type="text" className="form-control" id="address" placeholder="1234 Main St" required/>
                         <div className="invalid-feedback">Please enter your shipping address.</div>
                     </div>
                     <div className="col-10">
-                        <label for="address2" className="form-label">Address 2 <span className="text-body-secondary">(Optional)</span></label>
+                        <label htmlFor="address2" className="form-label">Address 2 <span className="text-body-secondary">(Optional)</span></label>
                         <input type="text" className="form-control" id="address2" placeholder="Apartment or suite"/>
                     </div>
                     <div className="col-md-3">
-                        <label for="country" className="form-label">Country</label>
-                        <select className="form-select" id="country" required="">
-                            <option value="">Choose...</option>
+                        <label htmlFor="country" className="form-label">Country</label>
+                        <select className="form-select" id="country" required>
                             <option>United States</option>
                         </select>
                         <div className="invalid-feedback">Please select a valid country.</div>
                     </div>
                     <div className="col-md-3">
-                        <label for="state" className="form-label">State</label>
-                        <select className="form-select" id="state" required="">
+                        <label htmlFor="state" className="form-label">State</label>
+                        <select className="form-select" id="state" required>
                             <option value="">Choose...</option>
                             <option>Alabama</option>
                             <option>Alaska</option>
@@ -189,13 +230,13 @@ const Cart = () => {
                         <div className="invalid-feedback">Please provide a valid state.</div>
                     </div>
                     <div className="col-md-3">
-                        <label for="city" className="form-label">City</label>
-                        <input type="text" className="form-control" id="city" placeholder="" required=""/>
+                        <label htmlFor="city" className="form-label">City</label>
+                        <input type="text" className="form-control" id="city" placeholder="" required/>
                         <div className="invalid-feedback">City is required</div>
                     </div>
                     <div className="col-md-2">
-                        <label for="zip" className="form-label">Zip</label>
-                        <input type="text" className="form-control" id="zip" placeholder="" required=""/>
+                        <label htmlFor="zip" className="form-label">Zip</label>
+                        <input type="text" className="form-control" id="zip" placeholder="" required/>
                         <div className="invalid-feedback">Zip code required.</div>
                     </div>
                 </div>
@@ -203,42 +244,73 @@ const Cart = () => {
                         <h4 className="mb-3">Payment</h4>
                         <div className="row gy-3">
                             <div className="col-md-6">
-                                <label for="cc-name" className="form-label">Name on card</label>
-                                <input type="text" className="form-control" id="cc-name" placeholder="" required=""/>
+                                <label htmlFor="cc-name" className="form-label">Name on card</label>
+                                <input type="text" className="form-control" id="cc-name" placeholder="" required/>
                                 <small className="text-body-secondary">Full name as displayed on card</small>
                                 <div className="invalid-feedback">
                                     Name on card is required
                                 </div>
                             </div>
                             <div className="col-md-6">
-                                <label for="cc-number" className="form-label">Credit card number</label>
-                                <input type="text" className="form-control" id="cc-number" placeholder="" required=""/>
+                                <label htmlFor="cc-number" className="form-label">Credit card number</label>
+                                <input type="text" className="form-control" id="cc-number" placeholder="" required/>
                                 <div className="invalid-feedback">
                                     Credit card number is required
                                 </div>
                             </div>
                             <div className="col-md-3">
-                                <label for="cc-expiration" className="form-label">Expiration</label>
-                                <input type="text" className="form-control" id="cc-expiration" placeholder="" required=""/>
+                                <label htmlFor="cc-expiration" className="form-label">Expiration</label>
+                                <input type="text" className="form-control" id="cc-expiration" placeholder="" required/>
                                 <div className="invalid-feedback">
                                     Expiration date required
                                 </div>
                             </div>
                             <div className="col-md-3">
-                                <label for="cc-cvv" className="form-label">CVV</label>
-                                <input type="text" className="form-control" id="cc-cvv" placeholder="" required=""/>
+                                <label htmlFor="cc-cvv" className="form-label">CVV</label>
+                                <input type="text" className="form-control" id="cc-cvv" placeholder="" required/>
                                 <div className="invalid-feedback">
                                     Security code required
                                 </div>
                             </div>
                         </div>
                     <hr className="my-4"/>
-                        <button className="w-100 btn btn-lg" id="buttons" type='submit' onClick={() => {secondGo()}}>Continue to checkout</button>
+                        <button className="w-100 btn btn-lg" id="buttons">Continue to checkout</button>
                 </form>
             </div>
         </div>
         )
     }
+    if(checkout === true){return (
+            <div className="row g-5">
+                <div className="col-md-7 col-lg-8">
+                    <h2 className='title text-success'>Your payment has been processed and your order will ship on October 13th, 2023 along with the offical launch of our site </h2>
+                    <div>
+                        <p className="text-body-secondary">Continue shopping our <Link to={`/product`}>products</Link></p>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+    if(checkout === false){return (
+        <div className="row g-5">
+                <div className="col-md-7 col-lg-8">
+                    <h2 className='title text-danger'>There was an error processing your payment</h2>
+                    <div>
+                        <p className="text-body-secondary">Continue shopping our <Link to={`/product`}>products</Link></p>
+                    </div>
+                </div>
+        </div>
+    )}
+    else { return (
+        <div className="row g-5">
+                <div className="col-md-7 col-lg-8">
+                    <h2 className='title'>Your cart is empty</h2>
+                    <div>
+                        <p className="text-body-secondary">Head to the <Link to={`/product`}>products</Link> page to shop</p>
+                    </div>
+                </div>
+        </div>
+    )}
 }
 
 export default Cart

@@ -35,7 +35,7 @@ const Login = () => {
     return (
         <>
             <h1>Login</h1>
-            <form className="row g-3">
+            <form className="row g-3" onSubmit={handleSubmit}>
                 <div className="col-md-4">
                     <label for="validationDefault01" className="form-label">Email</label>
                     <input type="email" name="email" value={email} className="form-control" id="validationDefault01" required onChange={(e) => setEmail(e.target.value)}/>
@@ -45,13 +45,13 @@ const Login = () => {
                     <input type="password" className="form-control" id="validationDefault02" required onChange={(e) => setPassword(e.target.value)}/>
                 </div>
                 <div className="col-12">
-                    <button className="btn btn-primary" variant="primary" type="submit" onClick={(e) => handleSubmit(e)}>Submit form</button>
+                    <button className="btn btn-primary" variant="primary" type="submit">Submit form</button>
                 </div>
                 {login === true && (
                     <p className='text-success'>User was logged in</p>
                 )}
                 {login === false && (
-                    <p className='text-danger'>Error during login</p>
+                    <p className='text-danger'>User does not exist</p>
                 )}
             </form>
         </>

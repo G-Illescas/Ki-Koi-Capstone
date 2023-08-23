@@ -22,7 +22,7 @@ const Details = () => {
         const code = productData._id;
         const title = productData.name;
         const url = productData.img;
-        const money = productData.price;
+        const money = parseFloat(productData.price);
         fetch(`http://localhost:5000/add-cart/`, {
             method: "POST",
             headers: {
@@ -53,8 +53,8 @@ const Details = () => {
                                 <div className="card-body justify-content-center">
                                     <h2 className="card-title">{productData.name}</h2>
                                     <h3 className="card-title">${productData.price}</h3>
-                                    <p className="card-text"><small class="text-body-secondary">{productData.category[0]}  {productData.category[1]}</small></p>
-                                    <p className="card-text"><small class="text-body-secondary">{productData.details[0]} {productData.details[1]}</small></p>
+                                    <p className="card-text"><small className="text-body-secondary">{productData.category[0]}  {productData.category[1]}</small></p>
+                                    <p className="card-text"><small className="text-body-secondary">{productData.details[0]} {productData.details[1]}</small></p>
                                     <p className="card-text">{productData.description}</p>
                                     <button className="btn btn-warning" id="buttons" variant="warning" type="submit">Add to cart</button>
                                 </div>

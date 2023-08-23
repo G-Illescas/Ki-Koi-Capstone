@@ -13,6 +13,7 @@ import Admin from './components/Admin';
 import Add from './components/Add';
 import Details from './components/Details';
 import Cart from './components/Cart';
+import FAQ from './components/FAQ';
 
 const router = createBrowserRouter([
   { path: "/",
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
   {
     path: "/cart",
     element:<><NavBar/><Cart/><Footer/></>
+  },
+  {
+    path: "/faq",
+    element:<><NavBar/><FAQ/><Footer/></>
   },
   {
     path: "/*",

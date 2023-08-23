@@ -14,6 +14,8 @@ const Add = () => {
     const [info, setInfo] = useState([""]);
     const [detail, setDetail] = useState("");
 
+    const [add, setAdd] = useState(null);
+
     useEffect(() => {
         const config = {
             method: "get",
@@ -41,6 +43,7 @@ const Add = () => {
             },
             body: JSON.stringify({title, url, money, box, info, detail})
         })
+        .then(setAdd(true))
         .then(response => response.json())
         .then(data => {
             console.log(data);
@@ -53,30 +56,33 @@ const Add = () => {
 
     if(message) {return (
         <>
+        {add === false && (
+            <h4 className='text-danger'>Please fill form out</h4>
+        )}
         <form className="row g-3" onSubmit={create}>
             <div className="col-md-5">
                 <label for="inputName" className="form-label">Name</label>
-                <input type="text" className="form-control" id="inputName" value={title} onChange={e => setTitle(e.target.value)}/>
+                <input type="text" className="form-control" id="inputName" value={title} required onChange={e => setTitle(e.target.value)}/>
             </div>
             <div className="col-5">
                 <label for="inputImage" className="form-label">Image</label>
-                <input type="text" className="form-control" id="inputPImage" value={url} onChange={e => setUrl(e.target.value)}/>
+                <input type="text" className="form-control" id="inputPImage" value={url} required onChange={e => setUrl(e.target.value)}/>
             </div>
             <div className="col-5">
                 <label for="inputPrice" className="form-label">Price</label>
-                <input type="float" className="form-control" id="inputPrice" value={money} onChange={e => setMoney(e.target.value)}/>
+                <input type="float" className="form-control" id="inputPrice" value={money} required onChange={e => setMoney(e.target.value)}/>
             </div>
             <div className="col-5">
                 <label for="inputCategory" className="form-label">Category</label>
-                <input className="form-control" id="inputCategory" value={box.join(',')} onChange={e => setBox(e.target.value.split(','))}/>
+                <input className="form-control" id="inputCategory" value={box.join(',')} required onChange={e => setBox(e.target.value.split(','))}/>
             </div>
             <div className="col-md-5">
                 <label for="inputDetails" className="form-label">Details</label>
-                <input className="form-control" id="inputDetails" value={info.join(',')} onChange={e => setInfo(e.target.value.split(','))}/>
+                <input className="form-control" id="inputDetails" value={info.join(',')} required onChange={e => setInfo(e.target.value.split(','))}/>
             </div>
             <div className="col-md-4">
                 <label for="inputDescription" className="form-label">Description</label>
-                <input type="text" className="form-control" id="inputDescription" value={detail} onChange={e => setDetail(e.target.value)}/>
+                <input type="text" className="form-control" id="inputDescription" value={detail} required onChange={e => setDetail(e.target.value)}/>
             </div>
             <div className="col-12">
                 <button type="submit" className="btn btn-primary">Add</button>
